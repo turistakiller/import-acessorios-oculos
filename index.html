@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Óculos</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            border-bottom: #ccc 1px solid;
+        }
+
+        header .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header h1 {
+            float: left;
+        }
+
+        nav ul {
+            float: right;
+            list-style: none;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-left: 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        section {
+            padding: 20px 0;
+        }
+
+        .product-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 10px;
+            width: 30%;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        button {
+            padding: 10px;
+            background: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #555;
+        }
+
+        #cart-items {
+            margin: 20px 0;
+        }
+
+        .cart-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .product-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <h1>Loja de Óculos</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#products">Produtos</a></li>
+                    <li><a href="#cart">Carrinho</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Seção de Produtos -->
+    <section id="products" class="container">
+        <h2>Produtos</h2>
+        <div class="product-grid">
+            <!-- Produto 1 -->
+            <div class="product">
+                <img src="https://via.placeholder.com/150" alt="Óculos 1">
+                <h3>Óculos Estilo 1</h3>
+                <p>R$ 299,00</p>
+                <button onclick="addToCart('Óculos Estilo 1', 299)">Adicionar ao Carrinho</button>
+            </div>
+            <!-- Produto 2 -->
+            <div class="product">
+                <img src="https://via.placeholder.com/150" alt="Óculos 2">
+                <h3>Óculos Estilo 2</h3>
+                <p>R$ 399,00</p>
+                <button onclick="addToCart('Óculos Estilo 2', 399)">Adicionar ao Carrinho</button>
+            </div>
+            <!-- Mais produtos podem ser adicionados aqui -->
+        </div>
+    </section>
+
+    <!-- Seção do Carrinho -->
+    <section id="cart" class="container">
+        <h2>Carrinho de Compras</h2>
+        <div id="cart-items">
+            <!-- Itens do carrinho serão adicionados aqui via JavaScript -->
+        </div>
+        <p id="total-price">Total: R$ 0,00</p>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2024 Loja de Óculos. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Script JavaScript -->
+    <script>
+        let cart = [];
+        const cartItems = document.getElementById('cart-items');
+        const totalPrice = document.getElementById('total-price');
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCart();
+        }
+
+        function updateCart() {
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
+                cartItems.appendChild(itemElement);
+                total += item.price;
+            });
+
+            totalPrice.textContent = `Total: R$ ${total.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
